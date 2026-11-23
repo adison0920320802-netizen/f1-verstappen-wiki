@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MAX VERSTAPPEN // MV1 TELEMETRY & KNOWLEDGE BASE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 碳纖維紋理背景與遙測掃描線 -->
+  <div class="carbon-overlay"></div>
+  <div class="telemetry-grid"></div>
+
+  <!-- 頂部賽道遙測導航列 -->
+  <header class="top-nav">
+    <div class="nav-brand">
+      <div class="car-number-badge">1</div>
+      <div class="brand-text">
+        <span class="team-tag">ORACLE RED BULL RACING // WIKI-DB</span>
+        <h1>MAX VERSTAPPEN</h1>
+      </div>
+    </div>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#profile" class="nav-item active" data-sector="S1"><span>S1</span> 個人簡介</a>
+      <a href="#teams" class="nav-item" data-sector="S2"><span>S2</span> 所屬車隊</a>
+      <a href="#honors" class="nav-item" data-sector="S3"><span>S3</span> 榮譽殿堂</a>
+      <a href="#teammates" class="nav-item" data-sector="PIT"><span>PIT</span> 歷代隊友</a>
+      <a href="#wiki-vault" class="nav-item" data-sector="DATA"><span>DB</span> 知識庫節點</a>
+    </nav>
+
+    <div class="drs-status">
+      <span class="status-dot"></span>
+      <span class="drs-label">DRS ENABLED</span>
+    </div>
+  </header>
+
+  <!-- HERO 賽車結構主視覺 -->
+  <section class="hero-section">
+    <div class="hero-chassis">
+      <div class="aero-wing-top">
+        <span>CHASSIS: RB-WIKI-MV01</span>
+        <span>POWER UNIT: HONDA RBPT</span>
+        <span>BASE: MILTON KEYNES, UK</span>
+      </div>
+
+      <div class="hero-main">
+        <div class="hero-copy">
+          <div class="driver-callsign">
+            <span class="flag-nl"></span>
+            <span>DUTCH LION // #1 WORLD CHAMPION</span>
+          </div>
+          <h2 class="glitch-title">MAX EMILIAN<br><span class="rb-red">VERSTAPPEN</span></h2>
+          <p class="hero-desc">
+            結構化 F1 個人知識庫（Karpathy Wiki Architecture）。從最年輕 F1 出賽車手到四屆世界冠軍，完整收錄其賽車生涯軌跡、空氣動力學時代演進、歷代隊友對決數據與技術百科條目。
+          </p>
+          <div class="hero-actions">
+            <a href="#profile" class="btn-primary">啟動遙測檔案 <span>→</span></a>
+            <a href="#wiki-vault" class="btn-secondary">瀏覽 Markdown 知識庫</a>
+          </div>
+        </div>
+
+        <!-- 互動式 F1 賽車結構透視遙測面板 -->
+        <div class="telemetry-cockpit">
+          <div class="cockpit-header">
+            <span>LIVE TELEMETRY // RB20-26 AERO SPEC</span>
+            <span class="rb-yellow">GEAR: 8 | 342 KM/H</span>
+          </div>
+
+          <div class="f1-schematic">
+            <!-- SVG F1 賽車俯視線框圖 + 可點擊結構熱點 -->
+            <svg viewBox="0 0 600 240" class="car-svg" xmlns="http://www.w3.org/2000/svg">
+              <!-- 賽道中心線 -->
+              <line x1="0" y1="120" x2="600" y2="120" stroke="rgba(255,255,255,0.08)" stroke-dasharray="6 6" />
+              <!-- 前翼 Front Wing -->
+              <path d="M510 45 L555 55 L565 120 L555 185 L510 195 L525 120 Z" fill="rgba(225,6,0,0.22)" stroke="#E10600" stroke-width="2"/>
+              <!-- 鼻錐 Nose Cone -->
+              <path d="M360 105 L545 113 L545 127 L360 135 Z" fill="#0B162C" stroke="#FCD700" stroke-width="2"/>
+              <!-- 前輪 Front Tires -->
+              <rect x="425" y="32" width="58" height="28" rx="6" fill="#141923" stroke="#E10600" stroke-width="2"/>
+              <rect x="425" y="180" width="58" height="28" rx="6" fill="#141923" stroke="#E10600" stroke-width="2"/>
+              <!-- 側箱 Sidepods & 底板 Venturi Tunnels -->
+              <path d="M210 75 Q290 60 365 92 L365 148 Q290 180 210 165 Z" fill="rgba(16,32,67,0.9)" stroke="#00A3E0" stroke-width="2"/>
+              <!-- 駕駛艙與 Halo -->
+              <ellipse cx="325" cy="120" rx="34" ry="14" fill="#060B16" stroke="#FCD700" stroke-width="2"/>
+              <path d="M305 120 L345 120 M332 108 L345 120 L332 132" stroke="#E10600" stroke-width="2.5" fill="none"/>
+              <!-- 引擎蓋 Engine Cover -->
+              <path d="M140 105 L295 102 L295 138 L140 135 Z" fill="#102043" stroke="#FFFFFF" stroke-width="1.5"/>
+              <!-- 後輪 Rear Tires -->
+              <rect x="115" y="28" width="66" height="34" rx="6" fill="#141923" stroke="#E10600" stroke-width="2"/>
+              <rect x="115" y="178" width="66" height="34" rx="6" fill="#141923" stroke="#E10600" stroke-width="2"/>
+              <!-- 尾翼 Rear Wing & DRS -->
+              <rect x="65" y="55" width="32" height="130" rx="3" fill="rgba(252,215,0,0.18)" stroke="#FCD700" stroke-width="2"/>
+              <line x1="78" y1="55" x2="78" y2="185" stroke="#E10600" stroke-width="2"/>
+            </svg>
+
+            <!-- 互動式結構節點按鈕 -->
+            <button class="aero-node" style="top: 16%; left: 82%;" data-part="front-wing">01 FRONT WING</button>
+            <button class="aero-node active" style="top: 45%; left: 50%;" data-part="cockpit">02 HALO / DRIVER</button>
+            <button class="aero-node" style="top: 72%; left: 42%;" data-part="floor">03 GROUND EFFECT</button>
+            <button class="aero-node" style="top: 18%; left: 12%;" data-part="rear-wing">04 DRS / PU</button>
+          </div>
+
+          <div class="part-readout" id="partReadout">
+            <div class="readout-title">02 // COCKPIT & DRIVER INTERFACE</div>
+            <p>精準的前輪指向性偏好（Pointy Front-End），極致晚煞車與出彎油門控制，在高速彎中展現極限抓地力掌控。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 核心數據儀表板 -->
+      <div class="kpi-strip">
+        <div class="kpi-box">
+          <span class="kpi-label">WORLD CHAMPIONSHIPS</span>
+          <span class="kpi-val rb-yellow">4x</span>
+          <span class="kpi-sub">2021 · 2022 · 2023 · 2024</span>
+        </div>
+        <div class="kpi-box">
+          <span class="kpi-label">GRAND PRIX WINS</span>
+          <span class="kpi-val">63+</span>
+          <span class="kpi-sub">史上最年輕分站冠軍 (18歲228天)</span>
+        </div>
+        <div class="kpi-box">
+          <span class="kpi-label">SINGLE SEASON RECORD</span>
+          <span class="kpi-val rb-red">19 WINS</span>
+          <span class="kpi-sub">2023 賽季 86.36% 歷史最高勝率</span>
+        </div>
+        <div class="kpi-box">
+          <span class="kpi-label">CONSECUTIVE WINS</span>
+          <span class="kpi-val">10</span>
+          <span class="kpi-sub">2023 邁阿密至義大利大獎賽連勝</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTOR 1: MAX 個人簡介 -->
+  <section id="profile" class="sector-container">
+    <div class="sector-header">
+      <span class="sector-badge">SECTOR 01 // DRIVER BIOGRAPHY</span>
+      <h3>Max Verstappen 個人檔案與駕駛哲學</h3>
+    </div>
+
+    <div class="profile-grid">
+      <div class="chassis-card bio-specs">
+        <div class="card-bar"><span>TECHNICAL PASSPORT // MV1</span><span>FIA SUPER LICENCE</span></div>
+        <ul class="spec-list">
+          <li><span>全名</span><strong>Max Emilian Verstappen</strong></li>
+          <li><span>出生日期</span><strong>1997 年 9 月 30 日（比利時哈瑟爾特）</strong></li>
+          <li><span>參賽國籍</span><strong>荷蘭 (Netherlands)</strong></li>
+          <li><span>永久車號</span><strong>#33（世界冠軍期間使用 #1）</strong></li>
+          <li><span>F1 首秀</span><strong>2015 年澳洲大獎賽（17 歲 166 天）</strong></li>
+          <li><span>賽車血統</span><strong>父 Jos Verstappen（前 F1 車手）／母 Sophie Kumpen（卡丁車冠軍）</strong></li>
+        </ul>
+      </div>
+
+      <div class="chassis-card bio-narrative">
+        <div class="card-bar"><span>DRIVING DNA & TELEMETRY PROFILE</span><span>STYLE ANALYSIS</span></div>
+        <h4>極致進攻型「重前軸」調校大師</h4>
+        <p>
+          Max Verstappen 的駕駛風格以<strong>極高靈敏度的前軸轉向（Oversteer-tolerant setup）</strong>聞名。他能容忍車尾在入彎時產生輕微滑動，藉此換取更早的車頭指向與更激進的 Apex 切入角度。
+        </p>
+        <div class="skill-bars">
+          <div class="skill-row">
+            <div class="skill-meta"><span>雨戰與低抓地力掌控 (Wet Weather Mastery)</span><span>99%</span></div>
+            <div class="progress-track"><div class="progress-fill" style="width: 99%;"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-meta"><span>輪胎管理與長距離節奏 (Tyre Degradation Control)</span><span>97%</span></div>
+            <div class="progress-track"><div class="progress-fill rb-yellow-bg" style="width: 97%;"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-meta"><span>排位賽單圈極限壓榨 (Qualifying One-Lap Pace)</span><span>98%</span></div>
+            <div class="progress-track"><div class="progress-fill rb-red-bg" style="width: 98%;"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTOR 2: 所屬車隊演進 -->
+  <section id="teams" class="sector-container">
+    <div class="sector-header">
+      <span class="sector-badge">SECTOR 02 // CONSTRUCTOR LINEAGE</span>
+      <h3>所屬車隊與戰車演進史</h3>
+    </div>
+
+    <div class="timeline-grid">
+      <div class="chassis-card team-card">
+        <div class="team-era">2015 — 2016 (Rd.1-4)</div>
+        <h4>Scuderia Toro Rosso</h4>
+        <div class="chassis-codes">戰車型號：STR10 · STR11</div>
+        <p>
+          年僅 17 歲破格晉升 F1，打破史上最年輕出賽紀錄。2015 年匈牙利與美國大獎賽兩度奪得第 4 名，展現超越賽車硬體極限的超車膽識與雨戰天賦。
+        </p>
+        <div class="team-stats">
+          <span>出賽：23 場</span>
+          <span>最佳完賽：P4</span>
+        </div>
+      </div>
+
+      <div class="chassis-card team-card featured-rb">
+        <div class="team-era rb-yellow">2016 (Rd.5) — PRESENT</div>
+        <h4>Oracle Red Bull Racing</h4>
+        <div class="chassis-codes">戰車型號：RB12 → RB16B → RB18 · RB19 · RB20 · RB21/22</div>
+        <p>
+          2016 年西班牙大獎賽轉隊首戰即奪冠，開啟紅牛王朝新篇章。經歷雷諾動力單元過渡期後，2019 年起攜手 <strong>Honda / RBPT</strong>，並於 2022 地面效應新規時代打造出統治級戰車 RB18 與 RB19。
+        </p>
+        <div class="team-stats">
+          <span>世界冠軍：4 座</span>
+          <span>合作引擎：TAG Heuer / Honda / RBPT-Ford</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTOR 3: 得過的榮譽 -->
+  <section id="honors" class="sector-container">
+    <div class="sector-header">
+      <span class="sector-badge">SECTOR 03 // TROPHY CABINET & RECORDS</span>
+      <h3>世界冠軍榮譽與 F1 歷史紀錄</h3>
+    </div>
+
+    <div class="honors-grid">
+      <div class="chassis-card trophy-card">
+        <div class="trophy-year">2021</div>
+        <h4>首座 F1 車手世界冠軍</h4>
+        <p>與 Lewis Hamilton 激戰至阿布達比收官戰最後一圈，為荷蘭奪得史上首座 F1 世界冠軍，終結賓士車隊連續七年車手冠軍壟斷。</p>
+      </div>
+      <div class="chassis-card trophy-card">
+        <div class="trophy-year">2022</div>
+        <h4>地面效應時代首冠 (RB18)</h4>
+        <p>克服開季兩度退賽劣勢，全季豪取 15 勝（打破當時單季勝場紀錄），提前四站於日本鈴鹿賽道成功衛冕。</p>
+      </div>
+      <div class="chassis-card trophy-card">
+        <div class="trophy-year">2023</div>
+        <h4>史詩級統治賽季 (RB19)</h4>
+        <p>22 場比賽贏得 19 勝、21 次登上頒獎台，締造 <strong>10 連勝</strong>與 <strong>575 分</strong>單季最高積分紀錄，助紅牛達成 21/22 勝恐怖勝率。</p>
+      </div>
+      <div class="chassis-card trophy-card">
+        <div class="trophy-year">2024</div>
+        <h4>四連霸達成 (RB20)</h4>
+        <p>面對賽季中段賽車平衡困境，憑藉穩定積分累積與聖保羅雨戰第 17 位起跑奪冠代表作，於拉斯維加斯提前鎖定四連冠。</p>
+      </div>
+    </div>
+
+    <div class="chassis-card records-table-wrap">
+      <div class="card-bar"><span>FIA OFFICIAL MILESTONES</span><span>ALL-TIME RECORDS</span></div>
+      <table class="f1-table">
+        <thead>
+          <tr>
+            <th>紀錄項目</th>
+            <th>締造數據</th>
+            <th>達成賽事 / 年份</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>史上最年輕 F1 大獎賽起步車手</td>
+            <td>17 歲 166 天</td>
+            <td>2015 澳洲大獎賽</td>
+          </tr>
+          <tr>
+            <td>史上最年輕 F1 分站冠軍</td>
+            <td>18 歲 228 天</td>
+            <td>2016 西班牙大獎賽</td>
+          </tr>
+          <tr>
+            <td>單季最多分站冠軍與最高勝率</td>
+            <td>19 勝（86.36%）</td>
+            <td>2023 賽季</td>
+          </tr>
+          <tr>
+            <td>F1 歷史最長分站連勝紀錄</td>
+            <td>10 連勝</td>
+            <td>2023 邁阿密 — 義大利站</td>
+          </tr>
+          <tr>
+            <td>單季領跑圈數突破千圈大關</td>
+            <td>1,003 圈（75.7%）</td>
+            <td>2023 賽季</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PIT WALL: 歷代隊友到現在的隊伍 -->
+  <section id="teammates" class="sector-container">
+    <div class="sector-header">
+      <span class="sector-badge">PIT WALL // TEAMMATE COMPARISON MATRIX</span>
+      <h3>歷代同隊隊友演進（2015 至今）</h3>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">全部隊友 (ALL)</button>
+      <button class="filter-btn" data-filter="toro-rosso">Toro Rosso 時期</button>
+      <button class="filter-btn" data-filter="red-bull">Red Bull Racing 時期</button>
+      <button class="filter-btn" data-filter="current">現役陣容 (CURRENT)</button>
+    </div>
+
+    <div class="teammates-grid" id="teammatesGrid">
+      <div class="chassis-card mate-card" data-era="toro-rosso">
+        <div class="mate-header">
+          <span class="mate-years">2015 — 2016 (Rd.4)</span>
+          <span class="mate-team-tag tr">TORO ROSSO</span>
+        </div>
+        <h4>Carlos Sainz Jr.</h4>
+        <p class="mate-role">同期新秀對決 · STR10 / STR11</p>
+        <p class="mate-note">兩位星二代新秀在紅牛二隊展開激烈內部競爭，排位賽互有勝負，但 Max 在正賽積分上以 49 : 18 佔優並率先獲得晉升。</p>
+      </div>
+
+      <div class="chassis-card mate-card" data-era="red-bull">
+        <div class="mate-header">
+          <span class="mate-years">2016 (Rd.5) — 2018</span>
+          <span class="mate-team-tag rb">RED BULL RACING</span>
+        </div>
+        <h4>Daniel Ricciardo</h4>
+        <p class="mate-role">「蜜獾」導師與巔峰搭檔 · RB12 – RB14</p>
+        <p class="mate-note">Max 生涯最具挑戰性的早期隊友。兩人在馬來西亞、巴庫等站上演經典肉搏，共同推動紅牛在混動時代爭奪分站勝利。</p>
+      </div>
+
+      <div class="chassis-card mate-card" data-era="red-bull">
+        <div class="mate-header">
+          <span class="mate-years">2019 (Rd.1-12)</span>
+          <span class="mate-team-tag rb">RED BULL RACING</span>
+        </div>
+        <h4>Pierre Gasly</h4>
+        <p class="mate-role">Honda 引擎元年搭檔 · RB15</p>
+        <p class="mate-note">面對極度敏感的 RB15 車尾特性，Gasly 難以適應調校節奏，半季後與 Albon 互換席位。</p>
+      </div>
+
+      <div class="chassis-card mate-card" data-era="red-bull">
+        <div class="mate-header">
+          <span class="mate-years">2019 (Rd.13) — 2020</span>
+          <span class="mate-team-tag rb">RED BULL RACING</span>
+        </div>
+        <h4>Alexander Albon</h4>
+        <p class="mate-role">研發回饋與中生代搭檔 · RB15 – RB16</p>
+        <p class="mate-note">為車隊提供極具價值的模擬器與調校數據，雖兩度錯失頒獎台，但成為 2021 爭冠賽車開發的重要幕後功臣。</p>
+      </div>
+
+      <div class="chassis-card mate-card" data-era="red-bull">
+        <div class="mate-header">
+          <span class="mate-years">2021 — 2024</span>
+          <span class="mate-team-tag rb">RED BULL RACING</span>
+        </div>
+        <h4>Sergio Pérez</h4>
+        <p class="mate-role">四連霸王朝黃金副手 · RB16B – RB20</p>
+        <p class="mate-note">2021 阿布達比關鍵防守助 Max 奪得首冠，並於 2022–2023 攜手為車隊奪回兩座車隊總冠軍與歷史首次包辦車手冠亞軍。</p>
+      </div>
+
+      <div class="chassis-card mate-card current-squad" data-era="red-bull current">
+        <div class="mate-header">
+          <span class="mate-years">2025 — PRESENT</span>
+          <span class="mate-team-tag current">ACTIVE LINEUP</span>
+        </div>
+        <h4>Liam Lawson / Red Bull 現役體系</h4>
+        <p class="mate-role">新世代紅牛青訓搭檔 · 現任車隊陣容</p>
+        <p class="mate-note">在 Max 領軍的核心架構下，紅牛持續啟用自家青訓體系新血並肩作戰，迎接新一代動力單元與空氣動力學規則週期。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIKI VAULT: 對應原始壓縮檔的結構化知識庫 -->
+  <section id="wiki-vault" class="sector-container">
+    <div class="sector-header">
+      <span class="sector-badge">KNOWLEDGE BASE // MARKDOWN REPOSITORY VIEWER</span>
+      <h3>個人知識庫條目瀏覽器（AGENTS.md / Wiki 結構）</h3>
+    </div>
+
+    <div class="wiki-browser">
+      <div class="wiki-sidebar">
+        <div class="sidebar-title">DIRECTORY TREE</div>
+        <button class="wiki-file-btn active" data-doc="index">📄 index.md（總目錄）</button>
+        <button class="wiki-file-btn" data-doc="log">📝 log.md（維護日誌）</button>
+        <button class="wiki-file-btn" data-doc="agents">⚙️ AGENTS.md（運作規範）</button>
+        <button class="wiki-file-btn" data-doc="ground-effect">🌀 wiki/concepts/Ground-Effect.md</button>
+        <button class="wiki-file-btn" data-doc="points">🏁 wiki/regulations/F1-Points-System.md</button>
+        <button class="wiki-file-btn" data-doc="regulations">📐 wiki/regulations/F1-Technical-Regulations.md</button>
+        <button class="wiki-file-btn" data-doc="championships">🏆 wiki/career/Championships-2021-2024.md</button>
+        <button class="wiki-file-btn" data-doc="teammates">👥 wiki/teammates/Teammates-History.md</button>
+        <button class="wiki-file-btn" data-doc="entities">🏛️ wiki/entities/F1-Teams-Lineage.md</button>
+      </div>
+      <div class="wiki-viewer" id="wikiViewer">
+        <!-- 由 script.js 動態渲染 -->
+      </div>
+    </div>
+  </section>
+
+  <footer class="f1-footer">
+    <div class="footer-inner">
+      <span>MV1 PERSONAL KNOWLEDGE BASE // DESIGNED FOR GITHUB PAGES</span>
+      <span>ORACLE RED BULL RACING INSPIRED TELEMETRY UI</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

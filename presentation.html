@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【零基礎入門】300 公里的極限競速！看懂 F1 與當代王者 Max Verstappen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #060B16;
+      --bg-surface: #0B162C;
+      --bg-card: rgba(16, 32, 67, 0.85);
+      --bg-card-hover: rgba(22, 44, 90, 0.95);
+      --rb-red: #E10600;
+      --rb-yellow: #FCD700;
+      --rb-blue: #00A3E0;
+      --text-main: #F0F4F8;
+      --text-muted: #94A3B8;
+      --text-dim: #64748B;
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-accent: rgba(225, 6, 0, 0.4);
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* 碳纖維與遙測背景紋理 */
+    .carbon-bg {
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 80% 20%, rgba(225, 6, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 10% 80%, rgba(0, 163, 224, 0.08) 0%, transparent 45%),
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* 頂部導航列 */
+    .pres-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: rgba(6, 11, 22, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 100;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      background: var(--rb-red);
+      color: #fff;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 2px 10px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--text-main);
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--rb-yellow);
+      font-family: var(--font-mono);
+      display: block;
+    }
+
+    .header-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .slide-counter {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px 12px;
+      border-radius: 4px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .slide-counter span {
+      color: var(--rb-yellow);
+      font-weight: 700;
+    }
+
+    /* 進度條 */
+    .progress-bar-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--rb-blue), var(--rb-red), var(--rb-yellow));
+      width: 11.11%;
+      transition: width 0.35s ease;
+    }
+
+    /* 簡報主要內容區 */
+    .pres-container {
+      flex: 1;
+      margin-top: 64px;
+      margin-bottom: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      z-index: 10;
+      position: relative;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      max-width: 1200px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 3rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+      animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* 頂部標籤 */
+    .sector-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--rb-yellow);
+      background: rgba(252, 215, 0, 0.1);
+      border: 1px solid rgba(252, 215, 0, 0.3);
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 1.25rem;
+    }
+
+    .slide-title {
+      font-family: var(--font-display);
+      font-size: 2.3rem;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 2rem;
+      color: #fff;
+    }
+
+    .slide-title .highlight {
+      color: var(--rb-yellow);
+    }
+    .slide-title .accent-red {
+      color: var(--rb-red);
+    }
+
+    /* 講義卡片網格 */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .handout-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .handout-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(252, 215, 0, 0.3);
+      background: var(--bg-card-hover);
+    }
+
+    .card-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--rb-blue);
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-heading {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-body {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    .card-body strong {
+      color: var(--text-main);
+    }
+
+    .card-body ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 0.5rem;
+    }
+
+    .card-body li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-body li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: var(--rb-red);
+      font-weight: bold;
+    }
+
+    /* 數值高亮看板 */
+    .stat-hero {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 0.75rem 0;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--rb-yellow);
+    }
+
+    .stat-unit {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* 積分天梯視覺 */
+    .points-ladder {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      margin: 1rem 0;
+    }
+
+    .point-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .point-box.p1 {
+      border-color: var(--rb-yellow);
+      background: rgba(252, 215, 0, 0.12);
+    }
+
+    .point-box.p2, .point-box.p3 {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .point-pos {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .point-val {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* 對比條 */
+    .bar-compare {
+      margin: 1.25rem 0;
+    }
+
+    .bar-row {
+      margin-bottom: 0.85rem;
+    }
+
+    .bar-info {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+
+    .bar-track {
+      height: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 6px;
+      transition: width 0.6s ease;
+    }
+
+    .bar-fill.max {
+      background: linear-gradient(90deg, var(--rb-red), var(--rb-yellow));
+      width: 100%;
+    }
+
+    .bar-fill.merc {
+      background: var(--rb-blue);
+      width: 71.13%; /* 409 / 575 */
+    }
+
+    /* 底部來源欄 */
+    .slide-footer-source {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .source-badge {
+      background: rgba(0, 163, 224, 0.15);
+      color: var(--rb-blue);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      border: 1px solid rgba(0, 163, 224, 0.3);
+    }
+
+    /* 底部控制列 */
+    .pres-controls {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 72px;
+      background: rgba(6, 11, 22, 0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 100;
+    }
+
+    .control-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .key-pill {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid var(--border-subtle);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--text-main);
+    }
+
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav:hover:not(:disabled) {
+      background: var(--rb-red);
+      border-color: var(--rb-red);
+      transform: translateY(-1px);
+    }
+
+    .btn-nav:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dot.active {
+      background: var(--rb-yellow);
+      transform: scale(1.2);
+    }
+
+    /* 響應式佈局微調 */
+    @media (max-width: 768px) {
+      .pres-header {
+        padding: 0 1rem;
+      }
+      .brand-title {
+        font-size: 0.8rem;
+      }
+      .pres-container {
+        padding: 1rem;
+      }
+      .slide {
+        padding: 1.5rem;
+      }
+      .slide-title {
+        font-size: 1.6rem;
+      }
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      .points-ladder {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .control-hint {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="carbon-bg"></div>
+
+  <!-- 頂部導航 -->
+  <header class="pres-header">
+    <div class="header-brand">
+      <div class="brand-badge">#1</div>
+      <div>
+        <div class="brand-title">MAX VERSTAPPEN // F1 BEGINNER'S GUIDE</div>
+        <span class="brand-subtitle">ORACLE RED BULL RACING KNOWLEDGE BASE</span>
+      </div>
+    </div>
+    <div class="header-meta">
+      <div class="slide-counter" id="slideCounter">SLIDE <span>01</span> / 09</div>
+    </div>
+    <div class="progress-bar-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </header>
+
+  <!-- 簡報舞台 -->
+  <main class="pres-container">
+
+    <!-- 投影片 01: 封面 -->
+    <article class="slide active" id="slide-1">
+      <div class="sector-tag">🏁 OVERVIEW // BEGINNER'S GUIDE</div>
+      <h2 class="slide-title">300 公里的極限競速！<br><span class="highlight">零基礎看懂 F1 與當代王者 Max Verstappen</span></h2>
+      
+      <div class="content-grid">
+        <div class="handout-card">
+          <div class="card-label">🏎️ 頂尖競速殿堂</div>
+          <h3 class="card-heading">什麼是一級方程式賽車 (F1)？</h3>
+          <div class="card-body">
+            <p><strong>世界賽車運動的最高金字塔頂端</strong>：</p>
+            <ul>
+              <li>全球僅有 <strong>20 位菁英賽車手</strong> 與 <strong>10 支頂尖製造商車隊</strong>。</li>
+              <li>賽車直道極速突破 <strong>300 km/h</strong>，在高速彎道具備極致貼地性能。</li>
+              <li>全年巡迴五大洲展開 24 場分站大獎賽（Grand Prix）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">👑 當代王者降臨</div>
+          <h3 class="card-heading">主角：荷蘭獅王 Max Verstappen</h3>
+          <div class="card-body">
+            <p><strong>現役 Oracle Red Bull Racing 車隊當家王牌</strong>：</p>
+            <ul>
+              <li>身披專屬世界冠軍 <strong>#1</strong> 號賽車出戰。</li>
+              <li>於 2021 至 2024 年達成歷史級的 <strong>車手世界冠軍四連霸</strong>。</li>
+              <li>以極度冷靜精準的駕駛風格與破紀錄的勝率統治現代賽場。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-source">
+        <span class="source-badge">WIKI SOURCE</span>
+        <span>wiki/entities/F1-Teams-Lineage.md · wiki/career/Championships-2021-2024.md</span>
+      </div>
+    </article>
+
+    <!-- 投影片 02: 積分規則 -->
+    <article class="slide" id="slide-2">
+      <div class="sector-tag">📊 SECTOR 01 // SPORTING REGULATIONS</div>
+      <h2 class="slide-title">比賽怎麼算輸贏？<br><span class="highlight">三分鐘看懂 F1 積分天梯</span></h2>
+
+      <div class="content-grid">
+        <div class="handout-card">
+          <div class="card-label">🏆 正賽前十名英雄榜</div>
+          <h3 class="card-heading">大獎賽正賽積分機制</h3>
+          <div class="card-body">
+            <p>只要跑完領先者 90% 以上里程且位列前十，即可賺取年度錦標賽積分：</p>
+            <div class="points-ladder">
+              <div class="point-box p1"><div class="point-pos">P1</div><div class="point-val">25分</div></div>
+              <div class="point-box p2"><div class="point-pos">P2</div><div class="point-val">18分</div></div>
+              <div class="point-box p3"><div class="point-pos">P3</div><div class="point-val">15分</div></div>
+              <div class="point-box"><div class="point-pos">P4</div><div class="point-val">12分</div></div>
+              <div class="point-box"><div class="point-pos">P5</div><div class="point-val">10分</div></div>
+              <div class="point-box"><div class="point-pos">P6</div><div class="point-val">8分</div></div>
+              <div class="point-box"><div class="point-pos">P7</div><div class="point-val">6分</div></div>
+              <div class="point-box"><div class="point-pos">P8</div><div class="point-val">4分</div></div>
+              <div class="point-box"><div class="point-pos">P9</div><div class="point-val">2分</div></div>
+              <div class="point-box"><div class="point-pos">P10</div><div class="point-val">1分</div></div>
+            </div>
+            <p>累積整年 24 站分站總分最高者，加冕<strong>年度車手世界冠軍 (WDC)</strong>。</p>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">⚡ 搶分關鍵技巧</div>
+          <h3 class="card-heading">衝刺賽與縮水給分原則</h3>
+          <div class="card-body">
+            <ul>
+              <li><strong>週六衝刺賽 (Sprint)</strong>：100 公里短程對決，前八名給予 8 至 1 分。Max 曾於 2023 卡達衝刺賽奪亞軍獲 7 分，週日正賽還沒跑就提前封王！</li>
+              <li><strong>最快圈速紅利</strong>：2019–2024 賽季前十名完賽且創最快圈者多給 1 分（2025 起取消）。</li>
+              <li><strong>縮水階梯</strong>：暴雨中斷時依完成里程分階段給分（<25% 給前五名；滿 75% 給全額積分）。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-source">
+        <span class="source-badge">WIKI SOURCE</span>
+        <span>wiki/regulations/F1-Points-System.md</span>
+      </div>
+    </article>
+
+    <!-- 投影片 03: 地面效應 -->
+    <article class="slide" id="slide-3">
+      <div class="sector-tag">🌀 SECTOR 02 // AERODYNAMICS</div>
+      <h2 class="slide-title">賽車為什麼不會起飛？<br><span class="highlight">「地面效應」與車底吸塵器的秘密</span></h2>
+
+      <div class="content-grid">
+        <div class="handout-card">
+          <div class="card-label">📐 空氣動力學本質</div>
+          <h3 class="card-heading">反著裝的飛機翅膀</h3>
+          <div class="card-body">
+            <p><strong>下壓力 (Downforce) 的物理奇蹟</strong>：</p>
+            <ul>
+              <li>飛機靠機翼下方的空氣向上推升；F1 賽車的前翼與尾翼則是將空氣往上推，產生巨大的<strong>反向向下的壓制力</strong>。</li>
+              <li>下壓力把輪胎死死壓在地面上，讓賽車在高速過彎時緊抓路面而不打滑。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">🏎️ 2022 重啟核心規則</div>
+          <h3 class="card-heading">文丘里底板與海豚跳攻克</h3>
+          <div class="card-body">
+            <ul>
+              <li><strong>車底吸塵器</strong>：2022 年重啟「地面效應（Ground Effect）」，透過車底特製的<strong>文丘里通道 (Venturi Tunnels)</strong>，氣流高速流經時產生巨大負壓，把賽車牢牢「吸」在賽道上。</li>
+              <li><strong>破解海豚跳 (Porpoising)</strong>：在各大車隊因氣流震盪劇烈顛簸上下震跳時，紅牛技術團隊成功壓制顛簸，打造出極速穩定的 RB18/RB19 冠軍戰車。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-source">
+        <span class="source-badge">WIKI SOURCE</span>
+        <span>wiki/concepts/Ground-Effect.md</span>
+      </div>
+    </article>
+
+    <!-- 投影片 04: 早期紀錄 -->
+    <article class="slide" id="slide-4">
+      <div class="sector-tag">👶 SECTOR 03 // ORIGIN & RECORDS</div>
+      <h2 class="slide-title">無照少年的狂飆奇蹟：<br><span class="accent-red">17 歲進軍 F1</span> 與逼賽會改規章的傳奇</h2>
+
+      <div class="content-grid">
+        <div class="handout-card">
+          <div class="card-label">⏱️ 破紀錄的火箭級跳級</div>
+          <h3 class="card-heading">連公路駕照都還沒有的年紀</h3>
+          <div class="card-body">
+            <ul>
+              <li>2013 年以 15 歲奪得 CIK-FIA KZ 變速卡丁車世界冠軍。</li>
+              <li>2014 年晉級歐洲 F3 單季奪得 10 勝（包含 Spa 與 Norisring 雙重三連勝），跳過 F2 直接簽約紅牛晉升 F1。</li>
+              <li><strong>17 歲 166 天</strong>：2015 澳洲站，成為史上最年輕 F1 出賽車手。</li>
+              <li><strong>17 歲 180 天</strong>：2015 馬來西亞站以第 7 名完賽，成為史上最年輕得分車手。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">⚖️ 歷史分水嶺</div>
+          <h3 class="card-heading">西班牙首勝與「Verstappen 條款」</h3>
+          <div class="card-body">
+            <ul>
+              <li><strong>18 歲 228 天首勝</strong>：2016 西班牙大獎賽轉入紅牛一軍首秀，力抗 Räikkönen 奪冠，包攬史上最年輕分站冠軍、領跑與登台三大紀錄！</li>
+              <li><strong>催生「Verstappen 條款」</strong>：FIA 緊急修改超級駕照規則，強制要求車手必須<strong>年滿 18 歲、持普通民用駕照且集滿 40 點青年積分</strong>。</li>
+              <li><strong>歷史絕響</strong>：在現行法律下，Max 的 17 歲出賽與得分紀錄後人已絕無打破可能！</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-source">
+        <span class="source-badge">WIKI SOURCE</span>
+        <span>wiki/career/Early-Career-Records.md</span>
+      </div>
+    </article>
+
+    <!-- 投影片 05: 四連霸王朝 -->
+    <article class="slide" id="slide-5">
+      <div class="sector-tag">🏆 SECTOR 04 // CHAMPIONSHIP ERA</div>
+      <h2 class="slide-title">四年君臨天下：<br><span class="highlight">名留青史的四連霸封王傳奇 (2021–2024)</span></h2>
+
+      <div class="content-grid">
+        <div class="handout-card">
+          <div class="card-label">📈 統治級總體成績單</div>
+          <h3 class="card-heading">四年 90 戰 53 勝之王朝</h3>
+          <div class="card-body">
+            <div class="stat-hero">
+              <span class="stat-num">58.9%</span>
+              <span class="stat-unit">四年平均勝率 (53勝 / 90戰)</span>
+            </div>
+            <ul>
+              <li><strong>53 場分站冠軍</strong> · 37 次桿位 · 70 次登上頒獎台。</li>
+              <li>累積總分高達 <strong>1,853.5 分</strong>。</li>
+              <li>成為 F1 歷史上第 6 位四冠王（追平 Alain Prost 與 Sebastian Vettel）。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">🔥 四季封王關鍵戰役</div>
+          <h3 class="card-heading">四大名留青史經典時刻</h3>
+          <div class="card-body">
+            <ul>
+              <li><strong>2021 (RB16B)</strong>：10 勝。阿布達比閉幕站決賽圈安全車重啟絕殺，首奪車手世界冠軍。</li>
+              <li><strong>2022 (RB18)</strong>：15 勝。鈴鹿賽道大雨中提前 4 站鎖定二連霸。</li>
+              <li><strong>2023 (RB19)</strong>：19 勝。第 17 站卡達衝刺賽週六提前封王（週日正賽起跑前鎖定冠軍），統治力巔峰。</li>
+              <li><strong>2024 (RB20)</strong>：9 勝。巴西站暴雨中自 <strong>第 17 位起跑大逆轉奪冠</strong>，拉斯維加斯提前加冕四連霸！</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-source">
+        <span class="source-badge">WIKI SOURCE</span>
+        <span>wiki/career/Championships-2021-2024.md</span>
+      </div>
+    </article>
+
+    <!-- 投影片 06: 2023 統治數據 -->
+    <article class="slide" id="slide-6">
+      <div class="sector-tag">🌟 SECTOR 05 // HISTORIC STATS</div>
+      <h2 class="slide-title">2023 年到底有多誇張？<br><span class="highlight">一個人的得分，超越對手整支車隊！</span></h2>
+
+      <div class="content-grid">
+        <div class="handout-card">
+          <div class="card-label">🥇 刷新 71 年歷史神話</div>
+          <h3 class="card-heading">22 戰 19 勝與 10 連勝障礙</h3>
+          <div class="card-body">
+            <div class="stat-hero">
+              <span class="stat-num">86.36%</span>
+              <span class="stat-unit">單季勝率 (打破 1952 年 Ascari 保持 71 年的紀錄)</span>
+            </div>
+            <ul>
+              <li><strong>單季 19 勝</strong>：刷新自身在 2022 年創下的 15 勝原紀錄。</li>
+              <li><strong>歷史最長 10 連勝</strong>：自邁阿密站一路連贏至義大利蒙札站。</li>
+              <li><strong>單季領跑 1,003 圈</strong>：史上第一位單季領跑破千圈車手（領跑率 75.7%）。</li>
+              <li>全季 21 次登頒獎台，100% 跑完全季 1,325 圈零退賽。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">📊 一人壓倒頂尖廠隊</div>
+          <h3 class="card-heading">575 分 vs 賓士全隊 409 分</h3>
+          <div class="card-body">
+            <p>2023 賽季 Max 一個人賺取的積分，比年度車隊亞軍 Mercedes 車隊「兩位車手分數總和」還要高出 <strong>166 分</strong>：</p>
+            <div class="bar-compare">
+              <div class="bar-row">
+                <div class="bar-info">
+                  <span>Max Verstappen (單人)</span>
+                  <span style="color:var(--rb-yellow); font-weight:700;">575 PTS</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill max"></div></div>
+              </div>
+              <div class="bar-row">
+                <div class="bar-info">
+                  <span>Mercedes-AMG 車隊 (全隊兩車手)</span>
+                  <span style="color:var(--rb-blue);">409 PTS</span>
+                </div>
+                <div class="bar-track"><div class="bar-fill merc"></div></div>
+              </div>
+            </div>
+            <p style="font-size:0.85rem; color:var(--text-dim);">以一人之力超越對手整支汽車製造商車隊，寫下現代 F1 空前絕後的統治神話。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-source">
+        <span class="source-badge">WIKI SOURCE</span>
+        <span>wiki/career/2023-Season-Records.md</span>
+      </div>
+    </article>
+
+    <!-- 投影片 07: 隊友殘酷對戰 -->
+    <article class="slide" id="slide-7">
+      <div class="sector-tag">⚔️ SECTOR 06 // TEAMMATE DYNAMICS</div>
+      <h2 class="slide-title">圍場最殘酷的真相：<br><span class="accent-red">為什麼說隊友才是車手最大的敵人？</span></h2>
+
+      <div class="content-grid">
+        <div class="handout-card">
+          <div class="card-label">🎯 相同賽車下的鐵血考驗</div>
+          <h3 class="card-heading">歷任隊友 Head-to-Head 對決</h3>
+          <div class="card-body">
+            <p><strong>F1 的隊友開完全相同的賽車，輸了沒有藉口：</strong></p>
+            <ul>
+              <li><strong>Carlos Sainz (2015-16)</strong>：排位 10:13，正賽 11:9，積分 62:22。</li>
+              <li><strong>Daniel Ricciardo (2016-18)</strong>：勝場 5:4，排位 34:24，唯一長線抗衡隊友。</li>
+              <li><strong>Pierre Gasly (2019上)</strong>：排位 11:1，正賽 12:0，12 場後降回二隊。</li>
+              <li><strong>Alexander Albon (2019下-20)</strong>：排位遭 Max 打出 26:0 橫掃。</li>
+              <li><strong>Sergio Pérez (2021-24)</strong>：排位 76:14，正賽 70:17，勝場 53:5，積分 1853.5:932。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">⚙️ 紅牛二號車手難題</div>
+          <h3 class="card-heading">Pointy Front-End「走鋼索」調校</h3>
+          <div class="card-body">
+            <ul>
+              <li><strong>極致銳利的前軸指向</strong>：Max 擁有在車尾微幅滑移（Oversteer）邊緣精準入彎的控車天賦，紅牛工程團隊依其習慣將賽車前輪轉向調校得無比靈敏。</li>
+              <li><strong>隊友的心理障礙</strong>：傳統頂級車手偏好車尾穩定的安全感，駕駛這台賽車如同在懸崖鋼索奔跑，光是克服失控恐懼就耗盡心力，導致單圈差距被幾何級放大！</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-source">
+        <span class="source-badge">WIKI SOURCE</span>
+        <span>wiki/teammates/Teammates-History.md</span>
+      </div>
+    </article>
+
+    <!-- 投影片 08: 幕後團隊 -->
+    <article class="slide" id="slide-8">
+      <div class="sector-tag">📻 SECTOR 07 // PIT WALL & LINEAGE</div>
+      <h2 class="slide-title">300 公里下的耳語：<br><span class="highlight">頂尖車手背後的工程軍師與體系</span></h2>
+
+      <div class="content-grid">
+        <div class="handout-card">
+          <div class="card-label">🏛️ 紅牛培育體系架構</div>
+          <h3 class="card-heading">二隊搖籃到一軍旗艦</h3>
+          <div class="card-body">
+            <ul>
+              <li><strong>Scuderia Toro Rosso (青年軍二隊，義大利法恩扎)</strong>：新秀搖籃，Max 在此完成 23 場大獎賽磨練，最佳完賽第 4 名打下堅實基礎。</li>
+              <li><strong>Oracle Red Bull Racing (一軍旗艦，英國米爾頓凱恩斯)</strong>：爭冠核心，自 2016 西班牙站首秀奪冠起效力至今，奪下四座車手世界冠軍。</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">🎙️ 車載無線電的靈魂夥伴</div>
+          <h3 class="card-heading">賽道工程師 Gianpiero Lambiase (GP)</h3>
+          <div class="card-body">
+            <ul>
+              <li>自 2016 年起擔任 Max 的專屬賽道工程師（Race Engineer）。</li>
+              <li><strong>座艙外的第二雙眼</strong>：當車手在以時速 300 公里盲飆時，工程師在指揮台計算進站時機、監控對手秒差與指示賽車設定開關。</li>
+              <li><strong>招牌坦率風格</strong>：兩人在無線電中風格冷靜、直接且互不客氣，但在極限攻防時刻維持絕對信任，被譽為圍場最強車手工程師組合。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-source">
+        <span class="source-badge">WIKI SOURCE</span>
+        <span>wiki/entities/F1-Teams-Lineage.md</span>
+      </div>
+    </article>
+
+    <!-- 投影片 09: 結語與觀賽指南 -->
+    <article class="slide" id="slide-9">
+      <div class="sector-tag">🏁 SECTOR 08 // CHEQUERED FLAG</div>
+      <h2 class="slide-title">現在你已經懂了！<br><span class="highlight">新手觀賞下一場 F1 大獎賽的 3 大黃金視角</span></h2>
+
+      <div class="content-grid">
+        <div class="handout-card">
+          <div class="card-label">👀 視角一：進站與積分</div>
+          <h3 class="card-heading">看進站換胎策略</h3>
+          <div class="card-body">
+            <p>盯緊前十名積分爭奪戰（P1 的 25 分到 P10 的 1 分），注意賽車進站 2 秒左右的換胎時間，看誰能藉由「進站翻越（Undercut）」在賽道上完成超車！</p>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">👀 視角二：過彎與吸力</div>
+          <h3 class="card-heading">看賽車地面效應姿態</h3>
+          <div class="card-body">
+            <p>觀察高速彎中文丘里底板帶來的驚人貼地吸力，體會 Max 極致晚煞車、銳利切入彎心並提早全油門出彎的精湛控車藝術。</p>
+          </div>
+        </div>
+
+        <div class="handout-card">
+          <div class="card-label">👀 視角三：隊內秒差</div>
+          <h3 class="card-heading">看同隊兩台車的殘酷差距</h3>
+          <div class="card-body">
+            <p>留意開相同賽車的隊友之間的單圈落差，真正感受誰是在走鋼索的極限邊緣駕馭神經質賽車的頂級天賦王者。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-footer-source">
+        <span class="source-badge">WIKI SOURCE</span>
+        <span>wiki/regulations/F1-Points-System.md · wiki/concepts/Ground-Effect.md · wiki/teammates/Teammates-History.md</span>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- 底部控制列 -->
+  <footer class="pres-controls">
+    <div class="control-hint">
+      <span>導航提示：使用鍵盤</span>
+      <span class="key-pill">←</span>
+      <span class="key-pill">→</span>
+      <span>或空白鍵切換投影片</span>
+    </div>
+
+    <div class="nav-dots" id="navDots">
+      <div class="dot active" data-slide="1"></div>
+      <div class="dot" data-slide="2"></div>
+      <div class="dot" data-slide="3"></div>
+      <div class="dot" data-slide="4"></div>
+      <div class="dot" data-slide="5"></div>
+      <div class="dot" data-slide="6"></div>
+      <div class="dot" data-slide="7"></div>
+      <div class="dot" data-slide="8"></div>
+      <div class="dot" data-slide="9"></div>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="btn-nav" id="btnPrev" disabled>← 上一頁</button>
+      <button class="btn-nav" id="btnNext">下一頁 →</button>
+    </div>
+  </footer>
+
+  <script>
+    // 簡報核心互動腳本
+    let currentSlide = 1;
+    const totalSlides = 9;
+
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const slideCounter = document.getElementById('slideCounter');
+    const progressBar = document.getElementById('progressBar');
+
+    function updatePresentation(slideNumber) {
+      if (slideNumber < 1 || slideNumber > totalSlides) return;
+      currentSlide = slideNumber;
+
+      // 切換投影片顯示
+      slides.forEach((slide, idx) => {
+        if (idx + 1 === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      // 更新進度點
+      dots.forEach((dot, idx) => {
+        if (idx + 1 === currentSlide) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+
+      // 更新頁碼指示器
+      const formattedNum = currentSlide.toString().padStart(2, '0');
+      slideCounter.innerHTML = `SLIDE <span>${formattedNum}</span> / 09`;
+
+      // 更新頂部進度條
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+
+      // 更新按鈕狀態
+      btnPrev.disabled = currentSlide === 1;
+      btnNext.disabled = currentSlide === totalSlides;
+      if (currentSlide === totalSlides) {
+        btnNext.textContent = '完成講義 ✓';
+      } else {
+        btnNext.textContent = '下一頁 →';
+      }
+
+      // 滾動至頂部以獲得良好閱讀視角
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 按鈕點擊監聽
+    btnPrev.addEventListener('click', () => {
+      if (currentSlide > 1) updatePresentation(currentSlide - 1);
+    });
+
+    btnNext.addEventListener('click', () => {
+      if (currentSlide < totalSlides) {
+        updatePresentation(currentSlide + 1);
+      } else {
+        // 最後一頁循環或提示
+        updatePresentation(1);
+      }
+    });
+
+    // 圓點點擊跳轉
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const target = parseInt(dot.dataset.slide, 10);
+        updatePresentation(target);
+      });
+    });
+
+    // 鍵盤左右方向鍵切換
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        if (currentSlide < totalSlides) {
+          updatePresentation(currentSlide + 1);
+        } else {
+          updatePresentation(1);
+        }
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        if (currentSlide > 1) {
+          updatePresentation(currentSlide - 1);
+        }
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        updatePresentation(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        updatePresentation(totalSlides);
+      }
+    });
+
+    // 初始化
+    updatePresentation(1);
+  </script>
+</body>
+</html>
